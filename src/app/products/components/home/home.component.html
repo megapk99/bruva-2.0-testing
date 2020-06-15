@@ -1,0 +1,47 @@
+<div class="body">
+  <section id="cover">
+  <div class="cover-info">
+    <div class="cover-content">
+        <div class="container">
+            <h1 >Welcome to BRUVA</h1>
+            <h3>The Next Egyptian Shopfront</h3>
+            <a class="button">SHOP NOW »</a>
+
+        </div>
+
+    </div>
+</div>
+
+</section>
+
+
+
+    <div class="container ">
+    <div class="row ">
+        <div class="col-lg-3 col-md-6 col-xs-6" *ngFor="let product of products; index as i">
+            <div class="card shadow p- rounded" style="width: 14rem;">
+               <a [routerLink]="['/products/product-info', product.Id]"> <img [src]="product.image1" class="card-img-top" ></a>
+                <div class="card-body text-center">
+                  <h5 class="card-title">{{ product.name | titlecase }}</h5>
+                  <p class="card-text">{{ product.Price | currency }}</p>
+
+                  <div class="btn btn-group d-flex">
+                  <button class="flex-fill btn btn-warning" (click)="addToCart(i)" ><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</button>
+                  <button class="felex-fill btn " style="background-color: #212529;" (click)="addToFavorites(i)" > <i class="fa fa-heart" aria-hidden="true"></i>
+                  </button>
+                </div>  
+                 
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="footer text-center">
+  <br><p>Copyright © 2017 UIGRID | All Rights Reserved |www.uigrid.com
+
+  </p>
+</div>
+
