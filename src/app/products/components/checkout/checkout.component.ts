@@ -12,9 +12,15 @@ import { Checkout } from '../../interfaces/checkout.interface';
 export class CheckoutComponent implements OnInit {
   products: Product []= []
  user: firebase.User;
+ customers: any;
+  customerName: string;
+  customerAddress: string;
+  customerMobile: number;
+  customerCity: string;
   constructor(private cs: CartService,private ccs:CheckoutService) { }
 
   ngOnInit(): void {
+   
 
     this.cs.getProduct().subscribe(querySnapshot => {
       //console.log(querySnapshot.data())
@@ -31,14 +37,34 @@ export class CheckoutComponent implements OnInit {
 // }
 
   addToCheckout(product: Product) {
-
+    
+    product['Name'] = this.customerName;
+    product['Address'] = this.customerAddress;
+    product['City'] = this.customerCity;
+    product['Mobile'] = this.customerMobile;
+   
+     
        this.ccs.addToCheckout(product)
   }
+  
 
-  info(frm) {
+  // CreateRecord() {
+  //   let record = {};
+  //   record['Name'] = this.customerName;
+  //   record['Address'] = this.customerAddress;
+  //   record['City'] = this.customerCity;
+  //   record['Mobile'] = this.customerMobile;
+  //   this.ccs.create_NewCustomer(record).then(resp => {
+  //     this.customerName = "";
+  //     this.customerMobile = undefined;
+  //     this.customerAddress = "";
+  //     this.customerCity = "";
+  //     console.log(resp);
+  //   })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }
 
-this.ccs.info(frm.value.name, frm.value.address, frm.value.mobile, frm.value.city);
-
-  }
 
 }

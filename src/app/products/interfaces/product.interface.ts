@@ -9,4 +9,5 @@ export interface Product {
     sellerId?:string,
     Size?:string[],
     color?:string[]
+    cartId?:string[]
 }
