@@ -32,6 +32,8 @@ export class ProductInfoComponent implements OnInit {
   }
 addToFavorites(product:Product )  {
 this.fs.addToFavorites(product)
-}  
+} 
+
+
 }
  

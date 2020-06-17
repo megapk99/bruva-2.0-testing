@@ -21,7 +21,7 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
    
-
+    this.loadStripe();
     this.cs.getProduct().subscribe(querySnapshot => {
       //console.log(querySnapshot.data())
       querySnapshot.forEach(doc => {
@@ -35,6 +35,39 @@ export class CheckoutComponent implements OnInit {
 // this.ccs.checkout(frm.value.name, frm.value.mobile, frm.value.address, frm.value.city)
 
 // }
+
+pay(amount) {   
+
+  var handler = (<any>window).StripeCheckout.configure({
+    key: 'pk_test_51Gsw6xLCJ9qpCfOpVWOqZ02Bb3ZNgDAMw4wXAxlXtMS1kjTuYupF3qq8DhqZnVgguh9QvhnRCY89d6D9Nuy7mGNq00DOg1YifB',
+    locale: 'auto',
+    token: function (token: any) {
+      // You can access the token ID with `token.id`.
+      // Get the token ID to your server-side code for use.
+      console.log(token)
+      alert('Token Created!!');
+    }
+  });
+
+  handler.open({
+    name: 'Bruva',
+    description: 'Your Fashion Product!',
+    amount: amount * 100
+  });
+
+}
+
+loadStripe() {
+
+  if(!window.document.getElementById('stripe-script')) {
+    var s = window.document.createElement("script");
+    s.id = "stripe-script";
+    s.type = "text/javascript";
+    s.src = "https://checkout.stripe.com/checkout.js";
+    window.document.body.appendChild(s);
+  }
+}
+
 
   addToCheckout(product: Product) {
     

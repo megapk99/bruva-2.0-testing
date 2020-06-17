@@ -20,7 +20,7 @@ export class FavoritesService {
     this.auth.getUserState().pipe(switchMap(user => {
 
       return this.fs.collection(`products`).doc(product.Id).update({
-        'fav': [user.uid]
+        fav: firebase.firestore.FieldValue.arrayUnion(user.uid)
       })
     })).subscribe()
 
@@ -42,11 +42,10 @@ export class FavoritesService {
   }
 
 
-  delete(product: Product) {
+  delete(product:string) {
     console.log(product)
     return this.auth.getUserState().pipe(switchMap(user => {
-      return this.fs.collection(`products`).doc(product.Id).delete (), ref =>
-      ref.where('fav','array-contains', user.uid)
+      return this.fs.collection(`products`).doc(product).update( { fav:firebase.firestore.FieldValue.arrayRemove(user.uid)})
     }));
 
 
